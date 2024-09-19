@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Navigation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navigation {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .navigation p {
+            font-size: 1.2em;
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+
+        select, button {
+            padding: 10px;
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+
+        .homepage-link {
+            display: block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-size: 1.2em;
+        }
+
+        .homepage-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Link to Homepage -->
+    <a class="homepage-link" href="campus.html">This is my homepage.</a>
+
+    <h1>Campus Navigation</h1>
+    <div class="container">
+        <h2>Select Your Location</h2>
+        <select id="currentLocation">
+            <option value="" disabled selected>Select your current location</option>
+            <option value="reception">Reception</option>
+            <option value="library">Library</option>
+            <option value="academic_cell">Academic Cell</option>
+        </select>
+
+        <div id="destinationSection" style="display:none;">
+            <h2>Where do you want to go?</h2>
+            <select id="destination">
+                <option value="" disabled selected>Select your destination</option>
+                <option value="library">Library</option>
+                <option value="academic_cell">Academic Cell</option>
+            </select>
+        </div>
+
+        <div id="directionsSection" style="display:none;">
+            <h2>Directions</h2>
+            <div class="navigation">
+                <p id="directions"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const currentLocationSelect = document.getElementById('currentLocation');
+        const destinationSection = document.getElementById('destinationSection');
+        const destinationSelect = document.getElementById('destination');
+        const directionsSection = document.getElementById('directionsSection');
+        const directionsText = document.getElementById('directions');
+
+        currentLocationSelect.addEventListener('change', function() {
+            if (this.value === 'reception') {
+                destinationSection.style.display = 'block';
+            } else {
+                destinationSection.style.display = 'none';
+                directionsSection.style.display = 'none';
+            }
+        });
+
+        destinationSelect.addEventListener('change', function() {
+            if (this.value === 'library') {
+                directionsText.innerHTML = `
+                    Take a left and walk straight for 150 meters to the end.<br>
+                    Take a right and walk for 20 meters.<br>
+                    You have reached the Library.
+                `;
+            } else if (this.value === 'academic_cell') {
+                directionsText.innerHTML = `
+                    Take a right and walk straight for 100 meters.<br>
+                    Go upstairs to the first floor.<br>
+                    You have reached the Academic Cell.
+                `;
+            }
+            directionsSection.style.display = 'block';
+        });
+    </script>
+
+</body>
+</html>
